@@ -1,0 +1,14 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Admin {%endblock%} {%block body%}
+
+<h1>Operacion completada satisfactoriamente</h1>
+
+<button onclick="goBack()">RETROCEDER</button>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+{%endblock%}

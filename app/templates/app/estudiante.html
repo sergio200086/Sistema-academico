@@ -1,0 +1,56 @@
+{% extends "app/base.html" %} {% load static %}
+<html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto Cloud</title>
+
+    {%block css%}
+    <link rel="stylesheet" href="{% static 'app/css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'app/css/estiloGrupoEstudiante.css' %}"> {%endblock%} {%block body%}
+    <h1>Bienvenido Estudiante {{varestudiantes.usuario.last_name}}</h1>
+    <hr>
+
+    <img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+    <p class="InformacionUsuario">
+        {{varestudiantes.usuario.last_name}} {{varestudiantes.usuario.first_name}} <br> Código: {{varestudiantes.codigo}}
+        <br> Correo : {{varestudiantes.usuario.email}}
+    </p>
+    <a href="{% url 'app:cerrarsesion' %}">
+        <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+    </a>
+    <br>
+    <br>
+    <h2 style="color: white;">
+
+    </h2>
+
+    <table id="tablagrupos" border="1">
+        <tr>
+            <th>Id grupo</th>
+            <th>Asignatura</th>
+            <th>Semestre</th>
+            <th>Ver</th>
+        </tr>
+        {%for ver in grupos %}
+        <tr>
+            <td>{{ver.grupo.codigo}}</td>
+            <td>{{ver.grupo.asignatura}}</td>
+            <td>{{ver.grupo.semestre}}</td>
+            <td>
+                <a href="{% url 'app:verGrupoEstudiante' ver.grupo.id varestudiantes.usuario.id  %}" target="_blank">
+                    <i class="fa fa-eye" aria-hidden="true"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <br>
+
+    <div class="logoes">
+        <img src="{% static 'app/img/logo-social.png' %}" alt="logo-social">
+    </div>
+    {%endblock%}

@@ -1,0 +1,57 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estiloCrearProfesor.css' %}"> {%endblock%} {%block titulo%} Ver Estudiantes {%endblock%} {%block body%}
+<div class="contenedor">
+    <div class="title">
+        <h1>Ver Estudiantes</h1>
+        <hr>
+    </div>
+
+    <div class="Datos">
+        <div class="FotoPerfil">
+            <img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+        </div>
+        <div class="nombres">
+            Admin <br> id:Admin <br> Admin@gmail.com
+        </div>
+        <div class="cerrarsesion1">
+            <a href="{% url 'app:cerrarsesion' %}">
+                <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+            </a>
+        </div>
+    </div>
+
+    <div class="creacion">
+        <div class="tabla">
+            <table id="tablagrupos" border="1">
+                <tr class="cabezaestudiantes">
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>E-mail</th>
+                    <th>Código</th>
+                    <th>Id</th>
+                    <th>Editar</th>
+
+                </tr>
+
+                {%for ver in estudiantes %}
+                <tr>
+                    <td>{{ver.usuario.last_name}}</td>
+                    <td>{{ver.usuario.first_name}}</td>
+                    <td>{{ver.usuario.email}}</td>
+                    <td>{{ver.codigo}}</td>
+                    <td>{{ver.usuario.id}}</td>
+                    <td>
+                        <a href="{% url 'app:editarEstudiante' ver.usuario_id %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+
+            </table>
+        </div>
+    </div>
+    <a href="{% url 'app:admin' %}">
+        <input class="Boton" type="submit" value="Regresar">
+    </a>
+</div>
+{%endblock%}

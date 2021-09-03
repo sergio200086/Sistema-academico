@@ -1,0 +1,70 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Ver grupo determinado Profesor {%endblock%} {%block body%}
+<h1>Grupo {{grupollegada.asignatura}}</h1>
+<hr>
+<p class="InformacionUsuario">
+    Profesor: {{grupollegada.profesor}}
+    <br> Código Grupo: {{grupollegada.codigo}}
+    <br> Asignatura: {{grupollegada.asignatura}}
+    <!-- <br>{{grupollegada.estudiantesgrupo.all}} -->
+
+</p>
+<div>
+    <a href="{% url 'app:cerrarsesion' %}">
+        <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+    </a>
+</div>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+<br>
+
+</a>
+<br>
+<br>
+
+<table class="tablaprofe" border="1" style="position: absolute;left: 500px;top: 290px;">
+    <tr>
+        <th>Apellidos</th>
+        <th>Nombres</th>
+        <th>Email</th>
+        <th>Ver</th>
+    </tr>
+    {% for ver in grupollegada.estudiantesgrupo.all %}
+    <tr>
+        <td>{{ver.estudiante.usuario.last_name}}</td>
+        <td>{{ver.estudiante.usuario.first_name}}</td>
+        <td>{{ver.estudiante.usuario.email}}</td>
+        <td>
+            <a href="{% url 'app:verEstudianteComoProfesor' ver.estudiante.usuario.id  grupollegada.id  %}">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </a>
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+<table id="tablaprofe2" border="1">
+    <tr>
+        <th>Descripción</th>
+        <th>Editar</th>
+        <th>Ver</th>
+
+    </tr>
+
+    {% for ver1 in grupollegada.actividades.all %}
+    <tr>
+        <td>{{ver1.descripcion}}</td>
+        <td>
+            <a href="{% url 'app:editaractividad' ver1.id %}">
+                <i class="fa fa-pencil"></i>
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'app:verActividadProfesor' ver1.id grupollegada.id %}">
+                <i class="fa fa-eye" aria-hidden="true"></i>
+            </a>
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+{%endblock%}

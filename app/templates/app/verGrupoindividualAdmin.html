@@ -1,0 +1,55 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Ver grupo individual Admin {%endblock%} {%block body%}
+<h1>Ver grupo determinado Admin</h1>
+<hr>
+<p class="InformacionUsuario">
+    <br> Código Grupo: {{grupoenviado.codigo}}
+    <br> Asignatura: {{grupoenviado.asignatura}}
+    <br> Profesor : {{grupoenviado.profesor}}
+
+
+</p>
+<a href="{% url 'app:cerrarsesion' %}">
+    <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+</a>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+<br>
+</a>
+<br>
+<br>
+<!-- <a href="{% url 'app:verGruposComoAdmin' %}">
+    <input class="cerrarsesion" type="submit" value="Eliminar">
+</a> -->
+
+<a href="{% url 'app:agregarEstudianteAGrupo' grupoenviado.id %}">
+    <input class="cerrarsesion2" type="submit" value="+ Estudiante">
+</a>
+
+<table border="1" style="color: white;">
+    <tr>
+        <th>Apellidos</th>
+        <th>Nombres</th>
+        <th>Email</th>
+    </tr>
+
+
+    {%for ver in grupoenviado.estudiantesgrupo.all %}
+    <tr>
+        <td>{{ver.estudiante.usuario.last_name}}</td>
+        <td>{{ver.estudiante.usuario.first_name}}</td>
+        <td>{{ver.estudiante.usuario.email}}</td>
+
+
+
+    </tr>
+    {% endfor %}
+
+
+
+</table>
+<br>
+
+
+</table>
+
+{%endblock%}

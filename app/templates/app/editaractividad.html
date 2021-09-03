@@ -1,0 +1,24 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Editar Actividad {%endblock%} {%block body%}
+<h1>Editar actividad</h1>
+<hr>
+<a href="{% url 'app:cerrarsesion' %}">
+    <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+</a>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+<br>
+<form action="{% url 'app:editaractividadForm' actividadactual.id %}" method="POST">
+    {% csrf_token %}
+    <p style="color: white;">
+        Descripción*
+    </p>
+    <div>
+        <input name="descripcion" value="{{actividadactual.descripcion}}" type=" text " style="WIDTH: 240px; HEIGHT: 100px ">
+    </div>
+    <div style="position: absolute;left: 280px; ">
+
+        <button onclick="goback() " type="submit ">Editar Actividad</button>
+
+    </div>
+</form>
+<br> {%endblock%}

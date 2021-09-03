@@ -1,0 +1,54 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estiloCrearProfesor.css' %}"> {%endblock%} {%block titulo%} + Estudiante {%endblock%} {%block body%}
+<div class="contenedor">
+    <div class="title">
+        <h1>Agregar estudiante a un grupo</h1>
+        <hr>
+    </div>
+
+    <div class="Datos">
+        <div class="FotoPerfil">
+            <img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+        </div>
+        <div class="nombres">
+            Profesor del grupo : {{grupoenviado.profesor}} <br> Código: {{grupoenviado.id}} <br> Correo: {{grupoenviado.profesor.usuario.email}}
+        </div>
+        <div class="cerrarsesion1">
+            <a href="{% url 'app:cerrarsesion' %}">
+                <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+            </a>
+        </div>
+    </div>
+
+    <div class="creacion">
+        <div class="tabla">
+            <table id="tablagrupos" border="1">
+                <tr class="cabezaestudiantes">
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>E-mail</th>
+                    <th>Agregar</th>
+                </tr>
+
+                {%for ver in estudiantes %}
+                <tr>
+                    <td>{{ver.usuario.last_name}}</td>
+                    <td>{{ver.usuario.username}}</td>
+                    <td>{{ver.usuario.email}}</td>
+                    <td>
+                        <a href="{% url 'app:agregarestudianteagrupoForm' ver.usuario.id grupoenviado.id %}">
+                            <p>+</p>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+
+            </table>
+        </div>
+    </div>
+    <a href="{% url 'app:admin' %}">
+        <input class="Boton" type="submit" value="Regresar">
+    </a>
+</div>
+{%endblock%}

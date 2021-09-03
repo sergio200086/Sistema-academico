@@ -1,0 +1,47 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+
+<link rel="stylesheet" href="{% static 'app/css/estiloCrearProfesor.css' %}"> {%endblock%} {%block titulo%} Ver profesores {%endblock%} {%block body%}
+<div class="contenedor">
+    <div class="title">
+        <h1>Ver profesores</h1>
+        <hr>
+    </div>
+
+
+    <div class="Datos">
+        <div class="FotoPerfil">
+            <img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+
+        </div>
+        <div class="nombres">
+        </div>
+        <div class="cerrarsesion1">
+            <a href="{% url 'app:cerrarsesion' %}">
+                <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+            </a>
+        </div>
+    </div>
+    <div class="creacion">
+        <div class="tabla">
+            <table id="tablagrupos" border="1">
+                <tr class="cabezaprofe">
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>Email</th>
+                    <th>Ver</th>
+                </tr>
+
+                {%for ver in profesores %}
+                <tr>
+                    <td>{{ver.usuario.last_name}}</td>
+                    <td>{{ver.usuario.first_name}}</td>
+                    <td>{{ver.usuario.email}}</td>
+                    <td><a href="{% url 'app:listaDeCursosProfe' ver.usuario.id %}">{{ver.usuario.id}}</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+</div>
+{%endblock%}

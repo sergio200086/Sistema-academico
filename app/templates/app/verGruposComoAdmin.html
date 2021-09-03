@@ -1,0 +1,68 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Lista Grupos Admin {%endblock%} {%block body%}
+
+<head>
+    <script src="https://use.fontawesome.com/8db3925a16.js"></script>
+</head>
+
+<h1>Visualizar grupos en lista</h1>
+<hr>
+<p class="InformacionUsuario">
+    Nombre Admin
+    <br> id:Admin
+    <br> admin@gmail.com
+
+</p>
+<a href="{% url 'app:cerrarsesion' %}">
+    <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+</a>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+
+<table border="1" style="position: absolute; color: white;">
+    <tr class="cabeza">
+        <th>Id grupo</th>
+        <th>Código</th>
+        <th>Asignatura</th>
+        <th>Profesor</th>
+        <th>Cantidad estudiantes</th>
+        <th>Editar grupo</th>
+        <th>Ver grupo</th>
+        <th>Eliminar grupo</th>
+
+    </tr>
+    <tr>
+
+        {%for ver in grupos %}
+        <tr>
+            <td>{{ver.id}}</td>
+            <td>{{ver.codigo}}</td>
+            <td>{{ver.asignatura}}</td>
+            <td>{{ver.profesor}}</td>
+            <td>{{ver.estudiantesgrupo.all |length}}</td>
+            <td>
+                <a href="{% url 'app:editarGrupoAdmin' ver.id %}"><img src="{% static 'app/img/editar.jpg' %}" alt="editar" width="30"></a>
+            </td>
+            <td>
+                <a href="{% url 'app:verGrupoindividualAdmin' ver.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+            </td>
+            <td>
+                <a href="" onclick="eliminar({{ver.id}})">
+                    <i class="fa fa-trash"></i></a>
+                <script>
+                    function eliminar(idpag) {
+                        if (window.confirm("¿Seguro que desea eliminar el grupo " + idpag + " ?")) {
+
+                            window.open("eliminargrupo/" +
+                                idpag)
+                        }
+
+                    }
+                </script>
+            </td>
+        </tr>
+        {% endfor %}
+
+
+</table>
+
+{%endblock%}

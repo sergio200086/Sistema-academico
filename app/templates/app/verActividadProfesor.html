@@ -1,0 +1,86 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Ver Actividad {%endblock%} {%block body%}
+
+<h1>Visualizar actividad</h1>
+<hr>
+<p class="InformacionUsuario">
+    Grupo: {{actividadllegada.grupo.asignatura}}
+    <br> id grupo: {{actividadllegada.grupo.id}}
+    <br>Semestre : {{actividadllegada.grupo.semestre}}
+    <br>{{actividadllegada.id}}
+</p>
+<a href="{% url 'app:cerrarsesion' %}">
+    <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+</a>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+<br>
+<br>
+<h2 style="color: white;">Descripción:</h2>
+<p style="color: white;">{{actividadllegada.descripcion}}</p>
+
+</a>
+<br>
+<a href="" onclick="recargar()">
+    <h3 style="color: white;">
+        Si ha realizado cambios y no se visualizan, favor presione aquí</h3>
+</a>
+<script>
+    function recargar() {
+        window.location.reload()
+
+    }
+</script>
+
+<table border="1" style="color: white;position: absolute;">
+
+    <tr>
+        <th>Apellidos</th>
+        <th>Nombres</th>
+        <th>Cambiar nota</th>
+        <th>Guardar</th>
+    </tr>
+    {%for ver in grupollegada.estudiantesgrupo.all %}
+    <tr>
+        <td>{{ver.estudiante.usuario.last_name}}</td>
+        <td>{{ver.estudiante.usuario.first_name}}</td>
+        <form action="{% url 'app:cambiarnota' ver.id actividadllegada.id %}" method="POST">
+            {% csrf_token %}
+
+            <td>
+                <input style="width: 40px;" type="number" name="nota" min="0" max="5" step="0.1" value="">
+
+            </td>
+            <!-- <td>
+                {{ver.notasestudiante.all}}
+            </td> -->
+            <!-- <td>
+                {{actividadllegada.id}}
+            </td> -->
+            <td>
+                <button>Guardar</button>
+            </td>
+        </form>
+
+        {% endfor %}
+    </tr>
+</table>
+
+<table border="1" style="position: absolute; color: white;margin-left: 50%;margin-bottom: 100%; ">
+
+    <tr>
+        <th>Nota Actual</th>
+    </tr>
+    {%for ver in notallegada.all %}
+    <tr>
+        <td>
+            {{ver.valor}}
+        </td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+
+
+<img class="ustaprofe" src="{% static 'app/img/LOGO_USTA_AZUL.png' %}" alt="Logo usta"> {%endblock%}

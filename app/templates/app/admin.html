@@ -1,0 +1,49 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Admin {%endblock%} {%block body%}
+<h1>Bienvenido Administrador</h1>
+
+<p class="InformacionUsuario">
+    <br>
+    <h2 style="color: wheat;">
+
+        <p>{{ request.user.first_name }} </p>
+    </h2>
+</p>
+<a href="{% url 'app:cerrarsesion' %}">
+    <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+</a>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+<br>
+<br>
+<a href="{% url 'app:verListaEstudiantes' %}" target="_blank">
+    <input class="Boton" type="submit" value="Ver estudiantes">
+</a>
+<br>
+<br>
+<a href="{% url 'app:verGruposComoAdmin' %}" target="_blank">
+    <input class="Boton" type="submit" value="Ver grupos">
+</a>
+<br>
+<br>
+<a href="{% url 'app:verProfesores' %}" target="_blank">
+    <input class="Boton" type="submit" value="Ver profesores">
+</a>
+<br>
+<br>
+<a href="{% url 'app:crearGrupoAdmin' %}" target="_blank">
+    <input class="Boton" type="submit" value="Crear grupo">
+</a>
+<br>
+<br>
+<a href="{% url 'app:crearProfesor' %}" target="_blank">
+    <input class="Boton" type="submit" value="Crear profesor">
+</a>
+<br>
+<br>
+<a href="{% url 'app:crearEstudiante' %}" target="_blank">
+    <input class="Boton" type="submit" value="Crear alumno">
+</a>
+<div class="logoxd">
+    <img src="{% static 'app/img/logo-social.png' %}" alt="logo-social"></div>
+
+{%endblock%}

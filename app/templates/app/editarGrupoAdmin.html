@@ -1,0 +1,54 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}">
+<link rel="stylesheet" href="{% static 'app/css/estilocrearEstudiante.css' %}"> {%endblock%} {%block titulo%} Editar Grupo como admin {%endblock%}
+<!-- ESTE CSS ESTÄ MAL¿¿¿¿¿¿¿¿?¿?¿?¿?¿?¿?¿?¿? -->
+
+{%block body%}
+
+<h1> EDITAR GRUPO</h1>
+<hr>
+<br>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+
+
+<div class="admincreargrupo">
+
+
+    <a href="{% url 'app:cerrarsesion' %}">
+        <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+    </a>
+
+    <form action="{% url 'app:editarGrupoAdminForm' grupoenviado.id %}" method="POST">
+        {% csrf_token %}
+        <label for="asignaturain" id="lblasignatura">Codigo del grupo *</label>
+        <input name="codigo" type="text" id="asignaturain" value={{grupoenviado.codigo}} class="inasignatura">
+        <br>
+        <br>
+        <label for="semestrein" id="lblsemestre">Asignatura* </label>
+        <input name="asignatura" type="text" id="semestrein" value={{grupoenviado.asignatura}} class="insemestre">
+        <br>
+        <br>
+
+        <label for="profesorin" id="lblprofesor">Profesor
+            <select name="profesor" id="profesor">
+                {% for ver in profesoresaenviar%}
+                <option value="{{ver.usuario.id}}">{{ver.usuario.last_name}}</option>
+                {% endfor %}
+            </select>
+        </label>
+        <br>
+        <br>
+
+        <label for="cantidadin" id="lblcantidad">Semestre* </label>
+        <input name="semestre" type="number" id="cantidadin" value={{grupoenviado.semestre}} class="incantidad" min=1 max=10>
+        <br>
+        <br>
+        <button class="enviarGrupo" type="submit" value="Guardar">Guardar</button>
+    </form>
+</div>
+<br>
+
+<img src="{% static 'app/img/LOGO_USTA_AZUL.png' %}" alt="Logo" class="logoustagrupo" width="200">
+
+</form>
+{%endblock%}

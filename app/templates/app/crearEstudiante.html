@@ -1,0 +1,45 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilocrearestudiante.css' %}"> {%endblock%} {%block titulo%} Crear Estudiante {%endblock%} {%block body%}
+<h1> CREACION DE ESTUDIANTE</h1>
+<hr>
+<br>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+<img src="{% static 'app/img/LOGO_USTA_AZUL.png' %}" alt="Logo" class="logousta" width="200">
+
+<div class="olakase">
+
+    <a href="{% url 'app:cerrarsesion' %}">
+        <input class="cerrar" type="submit" value="Cerrar Sesión">
+    </a>
+    <!-- COMIENZO CREACIÔN ESTUDIANTE EN BD -->
+    <form action="{% url 'app:crearEstudianteForm' %}" method="POST">
+        {% csrf_token %}
+        <label for="apellidos" id="lblapellidos">Apellidos*  </label>
+        <input name="apellidosEst" type="text" id="apellidos" placeholder="Ingrese apellidos del estudiante" class="inapellido">
+        <br>
+        <br>
+        <label for="nombre" id="lblnombre"> Nombre* </label>
+        <input name="nombresEst" type="text" placeholder="Ingrese nombre del estudiante" class="inombre" id="nombre">
+        <br>
+        <br>
+        <label for="codigo" id="lblcodigo">Codigo* </label>
+        <input name="codigoEst" type="text" placeholder="Ingrese codigo del estudiante" id="codigo" class="incodigo">
+        <br>
+        <br>
+        <label for="email" id="lblemail"> Email* </label>
+        <input name="emailEst" type="text" id="email" placeholder="Ingrese el email del estudiante" class="inemail">
+        <br>
+        <br>
+        <label for="carrera" id="lblcarrera">Contraseña* </label>
+        <input name="contraEst" type="password" id="carrera" placeholder="Ingrese contraseña del estudiante" class="incontraseña">
+        <br>
+        <button>Crear Estudiante</button>
+    </form>
+    <!-- FINALIZACIÖN BD CREAR ESTUDIANTE -->
+</div>
+<br>
+<!-- <a href="{% url 'app:verListaEstudiantes' %}"><input class="enviarEstudiante" type="submit" value="Enviar"></a> -->
+
+</form>
+
+{%endblock%}

@@ -1,0 +1,45 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Ver Estudiante determinado Profesor {%endblock%} {%block body%}
+
+<h1>Ver estudiante determinado Profesor</h1>
+<hr>
+<p class="InformacionUsuario">
+    <br>Apellidos: {{estudianteEnviado.usuario.last_name}}
+    <br>Nombre: {{estudianteEnviado.usuario.first_name}}
+    <br>Email: {{estudianteEnviado.usuario.email}}
+
+
+</p>
+<a href="{% url 'app:cerrarsesion' %}">
+    <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+</a>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+</a>
+<br>
+
+<table style="color: white;position: absolute;" border="1">
+
+    <tr>
+        <th>Descripción</th>
+    </tr>
+
+    {% for ver in estudiantegrupollegada.notasestudiante.all %}
+    <tr>
+        <td>
+            {{ver.actividad.descripcion}}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<table style="color: white;position: absolute;margin-left: 16.5%;" border="1">
+    <tr>
+        <th>Nota</th>
+    </tr>
+    {% for ver in estudiantegrupollegada.notasestudiante.all %}
+    <tr>
+        <td>{{ver.valor}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<img class="ustaprofe" src="{% static 'app/img/LOGO_USTA_AZUL.png' %}" alt="Logo usta"> {%endblock%}

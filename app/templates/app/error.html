@@ -1,0 +1,29 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Admin {%endblock%} {%block body%}
+
+<h1>ERROR</h1>
+{% if errorcreacionestudiante %}
+<h3 style="color: wheat;">{{errorcreacionestudiante}}</h3>
+
+{% endif %} {% if errorlogin %}
+<h3 style="color: wheat;">{{errorlogin}}</h3>
+
+{% endif %} {% if erroreditargrupo %}
+<h3 style="color: wheat;">{{erroreditargrupo}}</h3>
+
+{% endif %} {% if repetircorreo %}
+<h3 style="color: wheat;">{{repetircorreo}}</h3>
+
+{% endif %} {% if errorrepetirestudiante %}
+<h3 style="color: wheat;">{{errorrepetirestudiante}}</h3>
+
+{% endif %}
+<button onclick="goBack()">RETROCEDER</button>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+{%endblock%}

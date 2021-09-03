@@ -1,0 +1,23 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Proyecto cloud {%endblock%} {%block body%}
+<h1>BIENVENIDO A GRADER</h1>
+<div class="autenticacion">
+    <form action="{% url 'app:iniciar_sesion'  %}" method="POST">
+        {% csrf_token %}
+        <h2>USUARIO:</h2>
+        <input type="text" name="USUARIO">
+        <br>
+
+        <h2>CLAVE:</h2>
+        <input type="password" name="password">
+        <br>
+        <br><br>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+
+
+</div>
+<br>
+<!-- <a href="{% url 'app:admin' %}">asdiqiwfuqbwf</a> -->
+<img class="usta" src=" {% static 'app/img/LOGO_USTA_AZUL.png' %}  " alt="Logo usta">
+<br> {%endblock%}

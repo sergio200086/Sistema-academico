@@ -1,0 +1,58 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estiloCrearProfesor.css' %}"> {%endblock%} {%block titulo%} Crear Profesor {%endblock%} {%block body%}
+<div class="contenedor">
+    <div class="title">
+        <h1>Crear Profesor</h1>
+        <hr>
+    </div>
+
+    <div class="Datos">
+        <div class="FotoPerfil">
+            <img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+        </div>
+        <div class="nombres">
+            Acción de administrador
+        </div>
+        <div class="cerrarsesion1">
+            <a href="{% url 'app:cerrarsesion' %}">
+                <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+            </a>
+        </div>
+    </div>
+    <div class="creacion">
+        <div class="datosDelProfe">
+
+            <form action="{% url 'app:crearProfesorForm' %}" method="POST">
+                {% csrf_token %}
+                <label for="apellidosProfe">Apellidos:</label>
+                <input type="text" name="apellidosProfe">
+                <label for="apellidosProfe"><abbr title="required" aria-label="required"></abbr>*</abbr></label>
+                <br>
+                <label for="nombresProfe">Nombres:</label>
+                <input type="text" name="nombresProfe">
+                <label for="nombresProfe"><abbr title="required" aria-label="required"></abbr>*</abbr></label>
+                <br>
+                <label for="emailProfe">e-mail:</label>
+                <input type="text" name="emailProfe">
+                <label for="emailProfe"><abbr title="required" aria-label="required"></abbr>*</abbr></label>
+
+
+                <!-- <fieldset></fieldset> -->
+                <legend>Cátedra:</legend>
+                <select name="catedra" id="1">
+                    <option value=True>Si</option>
+                    <option value=False>No</option>
+                </select>
+                <br>
+                <label for="contraProfe">Contraseña:</label>
+                <input type="password" name="contraProfe">
+                <label for="contraProfe"><abbr title="required" aria-label="required"></abbr>*</abbr></label>
+                <div class="crearProfe">
+                    <button>Crear profesor</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{%endblock%}

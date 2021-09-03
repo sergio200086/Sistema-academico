@@ -1,0 +1,43 @@
+{% extends "app/base.html" %} {% load static %} {%block css%}
+<link rel="stylesheet" href="{% static 'app/css/estilo.css' %}"> {%endblock%} {%block titulo%} Bienvenido profesor {{varprofesores.usuario.last_name}} {%endblock%} {%block body%}
+<h1>Bienvenido Profesor {{varprofesores.usuario.last_name}}</h1>
+<hr>
+<p class="InformacionUsuario">
+    {{varprofesores.usuario.first_name}}
+    <br> id:{{varprofesores.usuario.id}}
+    <br>Correo: {{varprofesores.usuario.email}}
+
+</p>
+<a href="{% url 'app:cerrarsesion' %}">
+    <input class="cerrarsesion" type="submit" value="Cerrar Sesión">
+</a>
+<img src="{% static 'app/img/profilephoto.png' %}" alt="profilephoto" width="180">
+<br>
+<br>
+<a href="{% url 'app:crearAcividadProfesor' varprofesores.usuario.id  %}" target="_blank"><input class="Boton" type="submit" value="Crear actividad"></a>
+</a>
+<br>
+
+<br>
+<table class="tablaprofe" border="1">
+    <tr>
+        <th>Id grupo</th>
+        <th>Código</th>
+        <th>Asignatura</th>
+        <th>Ver</th>
+    </tr>
+    {%for ver in grupos %}
+    <tr>
+        <td>{{ver.semestre}}</td>
+        <td>{{ver.codigo}}</td>
+        <td>{{ver.asignatura}}</td>
+        <td>
+            <a href="{% url 'app:verGrupoProfesor' ver.id %}" target="_blank">
+                <i class="fa fa-eye" aria-hidden="true"></i></a>
+        </td>
+    </tr>
+    {% endfor %}
+
+
+</table>
+<img class="ustaprofe" src="{% static 'app/img/LOGO_USTA_AZUL.png' %}" alt="Logo usta"> {%endblock%}
